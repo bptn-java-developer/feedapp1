@@ -2,6 +2,8 @@ package com.bptn.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +21,16 @@ public class FeedController {
 		String str = "Feed App up and running";
 		
 		return str;
+	}
+
+	@GetMapping("/ping1")
+	public ResponseEntity<String> hello1() {
+		
+		logger.debug("Ping Executed!");
+		
+		String str = "Feed App up and running";
+		
+		return new ResponseEntity<>(str,HttpStatus.BAD_REQUEST);
 	}
 		
 	@GetMapping("/calc/{num1}/{num2}/{operator}")
