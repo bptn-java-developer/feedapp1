@@ -116,6 +116,13 @@ public class FileUtils {
 			System.out.println("File Written Successfully");
 		}
 		
+		// Update (Append data) a file
+		
+		try(FileWriter writer = new FileWriter(new File(p.toUri()), true)){
+			writer.write("\r\n");
+			writer.write("I'm updating the file");
+		};
+
 		//writer.close();
 		
 		//Read the file
