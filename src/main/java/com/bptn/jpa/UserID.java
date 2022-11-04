@@ -1,8 +1,11 @@
 package com.bptn.jpa;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +28,16 @@ public class UserID {
 	@Column(name = "\"userPassword\"")
 	String userPassword;
 
+	@OneToMany(mappedBy="userId")
+	private List<Post> posts;
+	
 	public UserID() {
 		super();
+	}
+
+	public UserID(String username) {
+		super();
+        this.username = username;
 	}
 
 	public UserID(String username, String name, String emailID, String phoneNumber, String userPassword) {
@@ -76,6 +87,14 @@ public class UserID {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
