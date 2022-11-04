@@ -28,8 +28,8 @@ public class UserID {
 	@Column(name = "\"userPassword\"")
 	String userPassword;
 
-	@OneToMany(mappedBy="userId")
-	private List<Post> posts;
+	@OneToMany(mappedBy="userId") //userId is the object name we use in the Post Entity
+	List<Post> posts;
 	
 	public UserID() {
 		super();

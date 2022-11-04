@@ -33,7 +33,7 @@ public class PostController {
     	return str;
     }
 
-    @GetMapping(value = "/posts/username/{username}")
+    @GetMapping(value = "/posts/usernam/{username}")
     public List<Post> getPostsByUsername(@PathVariable("username") String username) {
         
     	logger.debug("Executing getPostsByUsername API");

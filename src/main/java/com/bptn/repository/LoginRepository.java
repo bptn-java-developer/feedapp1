@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.bptn.jpa.UserID;
 
-
+@Repository
 public interface LoginRepository extends JpaRepository<UserID, String> {
 }
