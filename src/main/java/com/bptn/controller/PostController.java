@@ -7,12 +7,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bptn.exceptions.InvalidPostException;
+import com.bptn.exceptions.InvalidRequestException;
 import com.bptn.jpa.Post;
+import com.bptn.request.PostRequest;
 import com.bptn.service.PostService;
 
 @RestController
@@ -43,7 +48,7 @@ public class PostController {
         return posts;
     }
 
-    @GetMapping(value = "/posts/postID/{postID}")
+    @GetMapping(value = "/posts/postid/{postID}")
     public ResponseEntity<?> getPostsByPostId(@PathVariable("postID") String postID) {
         
     	logger.debug("Executing getPostsByPostId API");
@@ -60,7 +65,7 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/posts/postType/{postType}")
+    @GetMapping(value = "/posts/posttype/{postType}")
     public List<Post> getPostsByPostType(@PathVariable("postType") String postType) {
         
     	logger.debug("Executing getPostsByPostType API");
@@ -69,5 +74,35 @@ public class PostController {
 
         return posts;
     }
+    
+	/*
+	 * Sample Request Payload { "fromDate": "2022-09-13", "toDate": "2022-10-13",
+	 * "queryKeyword": "newyork", "userName": "username1" }
+	 */
+	@PostMapping(value = "/posts/create")
+	public ResponseEntity<?> saveFeed(@RequestBody PostRequest postRequest) {
+		
+		logger.debug("Executing saveFeed API");
+		
+		try {
+			this.validateRequest(postRequest);
+			//userService.validateUserId(feedPostRequest.getUsername());
+			Post feed = this.postService.getPostFromNewsAndSavePost(postRequest);
+			
+			logger.debug("Post saved successfully.");
+			return new ResponseEntity<>(feed, HttpStatus.OK);
+			
+		} catch (InvalidRequestException ex) {
+			
+			logger.error("Unable to save feed, cause={}", ex.getMessage());
+			return ResponseEntity.badRequest().body(ex.getMessage());
+		}
+	}
 
+	private void validateRequest(PostRequest postRequest) throws InvalidRequestException {
+		if (!StringUtils.hasText(postRequest.getFromDate()) && 
+			!StringUtils.hasText(postRequest.getToDate())) {
+			throw new InvalidRequestException("Invalid request : From Date or to Date is required");
+		}
+	}
 }

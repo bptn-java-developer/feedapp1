@@ -52,6 +52,7 @@ public class Post{
 		return post;
 	}
 
+
 	public void setPost(String post) {
 		this.post = post;
 	}
@@ -60,8 +61,14 @@ public class Post{
 		return this.userId;
 	}
 
+
 	public void setUserId(UserID userId) {
 		this.userId = userId;
+	}
+
+	@Override
+	public String toString() {
+		return "Post [postID=" + postID + ", postType=" + postType + ", post=" + post + ", userId=" + userId + "]";
 	}
 
 }

@@ -3,9 +3,12 @@ server:
   port: 8080
     
 logging.level:
-  web: OFF
-  '[com.bptn.controller]': DEBUG
-  '[org.hibernate]': OFF
+  web: INFO
+  root: INFO
+  '[com.bptn]': DEBUG
+  '[org.hibernate]': INFO
+  '[org.hibernate.cfg.annotations.EntityBinder]': DEBUG
+  '[org.springframework.beans.factory.support.DefaultListableBeanFactory]': DEBUG
   
 spring:
   datasource:
@@ -17,3 +20,7 @@ spring:
     hibernate:
       ddl-auto: validate
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      
+api:
+  key: 8a5a26a87b114b2b81e939653c65abea
+  base.url: https://newsapi.org/v2/everything
