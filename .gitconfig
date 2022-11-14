@@ -1,0 +1,17 @@
+[user]
+        name = Carlos Zegarra
+        email = cgzegarra@gmail.com
+[diff]
+[color.diff]
+        meta = yellow
+        new = green reverse
+        whitespace = red reverse
+[color]
+        ui = auto
+[alias]
+        st = status
+        ci = commit --verbose
+        co = checkout
+        di = diff -w
+        dc = diff --cached -w
+        noff = merge --no-ff
