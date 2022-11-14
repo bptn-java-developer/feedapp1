@@ -17,10 +17,14 @@ spring:
     password: postgres
   jpa:
     show-sql: true
+    open-in-view: false
     hibernate:
       ddl-auto: validate
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      
+    properties:
+      hibernate:
+        '[format_sql]': true
+     
 api:
   key: 8a5a26a87b114b2b81e939653c65abea
   base.url: https://newsapi.org/v2/everything

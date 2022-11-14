@@ -24,7 +24,7 @@ public class MailController {
 		
 	    logger.debug("Sending Email");
 
-	    this.mailService.sendEmail();
+	    this.mailService.sendEmail("cgzegarra@gmail.com");
 	
 	    return "Email sent successfully";
 	}

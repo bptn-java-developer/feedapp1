@@ -26,7 +26,7 @@ public class MailService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Async
-	public void sendEmail() throws AddressException, MessagingException {
+	public void sendEmail(String recipient) throws AddressException, MessagingException {
 
 		   logger.debug("Preparing Email");
 		
@@ -53,7 +53,7 @@ public class MailService {
 		   
 		   msg.setFrom(new InternetAddress("cgzegarra@gmail.com", false));
 
-		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("cgzegarra@gmail.com"));
+		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
 		   msg.setSubject("I Love Spring Mail");
 		   msg.setContent("Welcome to Spring Mail", "text/html");
 		   msg.setSentDate(new Date());
